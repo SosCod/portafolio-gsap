@@ -17,7 +17,7 @@ import {
   ChevronRight,
   Link,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import ScreenSection from './fullscreen';
 

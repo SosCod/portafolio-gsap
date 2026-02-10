@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { useBackground } from './background-provider';

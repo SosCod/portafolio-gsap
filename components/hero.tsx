@@ -13,7 +13,7 @@ import {
   Zap,
   Cpu,
 } from 'lucide-react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useSpring, useMotionValue } from 'motion/react';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import ScreenSection from './fullscreen';
 import { useBackground } from './background-provider';
