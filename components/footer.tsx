@@ -15,6 +15,7 @@ import {
   Heart,
   ExternalLink,
   ChevronRight,
+  Link,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
@@ -205,6 +206,15 @@ export function Footer() {
                 <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
                 <span className="text-xs font-bold">Berlin Dev</span>
               </div>
+              <div className="flex items-center gap-2 justify-end text-white/60">
+                <Link className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
+                <a
+                  href="https://www.paypal.com/ncp/payment/9N8LA5PMUVXMA"
+                  className="hover:text-primary transition-colors"
+                >
+                  Open Source Code
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -216,9 +226,6 @@ export function Footer() {
             <span className="hidden md:inline">•</span>
             <span>Based in Netherlands</span>
             <span className="hidden md:inline">•</span>
-            <a href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
-            </a>
           </div>
 
           <div className="flex items-center gap-8">
