@@ -17,7 +17,7 @@ import { motion, useSpring, useMotionValue } from 'motion/react';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import ScreenSection from './fullscreen';
 import { useBackground } from './background-provider';
-import TechStack3D from './TechStack3D';
+import ModelStack from './modelstack';
 import { Button } from './ui/button';
 import { cn } from '../lib/utils';
 
@@ -316,7 +316,7 @@ export default function Hero() {
             className="w-full lg:w-2/5 flex flex-center lg:justify-center relative"
           >
             <div className="relative w-full max-w-[320px] sm:max-w-[500px] aspect-square lg:scale-125">
-              <TechStack3D />
+              <ModelStack />
 
               {/* Floating detail elements */}
               {!isMobile && (
