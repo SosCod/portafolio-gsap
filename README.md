@@ -14,6 +14,9 @@ Welcome to **SosCode**, a high-performance, visually stunning portfolio template
 If you find this project useful or would like to purchase a commercial license for your own projects, you can support the development here:
 
 [![PayPal - Support](https://img.shields.io/badge/PayPal-Buy_me_a_coffee-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/ncp/payment/9N8LA5PMUVXMA)
+
+---
+
 Demo: https://soscode-sandy.vercel.app
 
 ---
