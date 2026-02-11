@@ -7,7 +7,22 @@ Welcome to **SosCode**, a high-performance, visually stunning portfolio template
 ![GSAP](https://img.shields.io/badge/GSAP-3.14-green?style=for-the-badge)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4.0-blue?style=for-the-badge)
 
- Demo: https://soscode-sandy.vercel.app
+---
+
+## � Support & Purchase
+
+If you find this project useful or would like to purchase a commercial license for your own projects, you can support the development here:
+
+[![PayPal - Support](https://img.shields.io/badge/PayPal-Buy_me_a_coffee-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/ncp/payment/9N8LA5PMUVXMA)
+Demo: https://soscode-sandy.vercel.app
+
+---
+
+If you purchased this code via the PayPal link in the footer, you are granted a commercial license to use this template for your personal or client projects. Redistribution of the raw source code is not permitted.
+
+---
+
+Crafted with ❤️ by **SosCode**
 
 ---
 
@@ -80,17 +95,3 @@ You can easily add or modify themes in the `components/background-provider.tsx` 
 - `primaryLight` / `primaryDark`: Variations for gradients and depth.
 
 ---
-
-## � Support & Purchase
-
-If you find this project useful or would like to purchase a commercial license for your own projects, you can support the development here:
-
-[![PayPal - Support](https://img.shields.io/badge/PayPal-Buy_me_a_coffee-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/ncp/payment/9N8LA5PMUVXMA)
-
----
-
-If you purchased this code via the PayPal link in the footer, you are granted a commercial license to use this template for your personal or client projects. Redistribution of the raw source code is not permitted.
-
----
-
-Crafted with ❤️ by **SosCode**
