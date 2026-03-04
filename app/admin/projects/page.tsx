@@ -1,6 +1,4 @@
 import { prisma } from '@/lib/prisma';
-
-export const dynamic = 'force-dynamic';
 import { Button } from '@/components/ui/button';
 import {
   Card,

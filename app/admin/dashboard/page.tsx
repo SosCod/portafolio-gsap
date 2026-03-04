@@ -1,7 +1,6 @@
 import { auth, signOut } from '@/auth';
 import { prisma } from '@/lib/prisma';
-
-export const dynamic = 'force-dynamic';
+import { Button } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';
 import { Plus, LogOut, Package, Tag, Layers, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
