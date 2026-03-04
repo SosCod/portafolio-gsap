@@ -14,9 +14,24 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { createProject } from '@/app/actions/projects';
 import ScreenSection from './fullscreen';
+import { Button } from './ui/button';
 
 gsap.registerPlugin(ScrollTrigger);
+
+export interface Project {
+  id: string | number;
+  title: string;
+  description: string;
+  tags: string | string[];
+  image: string;
+  stats: string | { [key: string]: string };
+  color: string;
+  price?: number | null;
+  paypalId?: string | null;
+  codeUrl?: string | null;
+}
 
 const projects = [
   {
@@ -86,13 +101,21 @@ function ProjectCard({
   index,
   isMobile,
 }: {
-  project: (typeof projects)[0];
+  project: Project;
   index: number;
   isMobile: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+
+  // Parse strings if they come from DB
+  const tagsList =
+    typeof project.tags === 'string' ? project.tags.split(',') : project.tags;
+  const statsObj =
+    typeof project.stats === 'string'
+      ? JSON.parse(project.stats)
+      : project.stats;
 
   useEffect(() => {
     if (!cardRef.current || isMobile) return;
@@ -173,7 +196,7 @@ function ProjectCard({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative h-[450px] rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:bg-white/[0.08] transition-colors cursor-pointer"
+      className="group relative h-[650px] rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:bg-white/[0.08] transition-colors cursor-pointer"
       style={{ transformStyle: 'preserve-3d' }}
     >
       <div
@@ -186,10 +209,7 @@ function ProjectCard({
       />
 
       {/* Project Background Gradient */}
-      <div
-        className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-        style={{ background: project.image }}
-      />
+      {/* Project Background Image or Gradient */}
 
       {/* Content */}
       <div
@@ -209,20 +229,24 @@ function ProjectCard({
               <span
                 className={`text-[10px] uppercase tracking-widest font-bold text-${project.color}`}
               >
-                Featured Project
+                {project.title}
               </span>
             </motion.div>
 
             <div className="flex gap-2">
               <motion.a
-                href="#"
+                href="https://github.com/SosCod"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/40 hover:text-white transition-colors"
               >
                 <Github className="w-4 h-4" />
               </motion.a>
               <motion.a
-                href="#"
+                href={project.codeUrl || undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: -10 }}
                 className="p-2 rounded-lg bg-white/5 border border-white/10 text-white/40 hover:text-white transition-colors"
               >
@@ -231,49 +255,78 @@ function ProjectCard({
             </div>
           </div>
 
-          <h3 className="text-3xl font-black mb-4 tracking-tight leading-tight group-hover:text-primary transition-colors duration-300">
-            {project.title}
-          </h3>
           <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
             {project.description}
           </p>
 
+          {(project.image.startsWith('http') ||
+            project.image.startsWith('/')) && (
+            <div className="relative w-full h-40 mb-6 rounded-sm overflow-hidden border border-white/10 group-hover:border-primary/50 transition-colors">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
+            {tagsList.map((tag: string) => (
               <span
                 key={tag}
                 className="text-[10px] uppercase tracking-widest px-2 py-1 rounded-md bg-white/5 border border-white/10 text-white/50"
               >
-                {tag}
+                {tag.trim()}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="pt-6 border-t border-white/10 flex items-center justify-between">
-          <div className="flex gap-6">
-            {Object.entries(project.stats).map(([key, value]) => (
-              <div key={key}>
-                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">
-                  {key}
-                </p>
-                <p className="text-lg font-bold text-white tracking-tight">
-                  {value}
-                </p>
-              </div>
-            ))}
+        <div className="pt-6 border-t border-white/10 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-6">
+              {Object.entries(statsObj).map(([key, value]: [string, any]) => (
+                <div key={key}>
+                  <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">
+                    {key}
+                  </p>
+                  <p className="text-lg font-bold text-white tracking-tight">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all duration-500">
+              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
           </div>
 
-          <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-all duration-500">
-            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </div>
+          {/* Buy Code Section */}
+          {(project.price || project.paypalId) && (
+            <div className="pt-2">
+              <a
+                href={
+                  project.paypalId && project.paypalId.startsWith('http')
+                    ? project.paypalId
+                    : '#'
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="w-full h-12 flex items-center justify-center rounded-xl bg-white/5 border border-primary/30 hover:bg-primary hover:text-black text-[10px] uppercase tracking-[0.2em] font-black transition-all"
+              >
+                Buy Code {project.price ? `— $${project.price}` : ''}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-export function Projects() {
+export function Projects({ projects = [] }: { projects?: Project[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);

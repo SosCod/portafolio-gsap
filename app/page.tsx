@@ -1,5 +1,3 @@
-'use client';
-
 import MouseParticles from '../components/mouse-particles';
 import NoiseOverlay from '../components/noise-overlay';
 import CodeRain from '../components/code-rain';
@@ -12,8 +10,13 @@ import { Skills } from '../components/skills';
 import { Projects } from '../components/projects';
 import { Contact } from '../components/contact';
 import { Footer } from '../components/footer';
+import { prisma } from '@/lib/prisma';
 
-export default function Home() {
+export default async function Home() {
+  const projects = await prisma.project.findMany({
+    orderBy: { createdAt: 'desc' },
+  });
+
   return (
     <main className="relative w-full min-h-screen text-foreground selection:bg-primary/50 overflow-x-hidden">
       <NoiseOverlay />
@@ -24,7 +27,7 @@ export default function Home() {
       <About />
       <Process />
       <Skills />
-      <Projects />
+      <Projects projects={projects} />
       <Contact />
       <Footer />
       <ScrollingBackgroundText

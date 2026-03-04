@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL") // Descomenta si usas Supabase con pooling
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String
+  role          String    @default("admin")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  tags        String   // Comma-separated or JSON string
+  image       String   // Gradient string or image path
+  stats       String   // JSON string
+  color       String   // 'primary' | 'secondary'
+  price       Float?   // Optional price for e-commerce
+  paypalId    String?  // Optional paypal hosted button id
+  codeUrl     String?  // URL to the code (after purchase)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
