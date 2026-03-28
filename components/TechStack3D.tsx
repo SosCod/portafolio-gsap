@@ -33,24 +33,6 @@ export default function TechStack3D() {
           },
         });
 
-        // Floating Badges Loops
-        gsap.to('.badge-react', {
-          y: -15,
-          duration: 3,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        });
-
-        gsap.to('.badge-flash', {
-          y: -10,
-          duration: 2.5,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-          delay: 0.5,
-        });
-
         // Mouse Parallax Effect
         const handleMouseMove = (e: MouseEvent) => {
           if (!sceneRef.current) return;
